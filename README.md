@@ -71,11 +71,10 @@ provenancekit --help
 
 Deep-signal fingerprints are pre-computed weight-level features stored as parquet files. They enable full weight-signal matching during `scan`. Without them, scan results rely on metadata and tokenizer signals.
 
-The download location can be configured with environment variables:
+The default deep-signal archive is hosted as a GitHub release asset:
 
 ```bash
-export PROVENANCEKIT_HF_DATASET_REPO=ey-ai/model-provenance-kit
-export PROVENANCEKIT_HF_DEEP_SIGNALS_URL=https://huggingface.co/datasets/ey-ai/model-provenance-kit/resolve/main/deep-signals.zip
+https://github.com/mayanklau/EY-AI-Model-Governace-Toolkit-Dataset-/releases/download/deep-signals-v1/deep-signals.zip
 ```
 
 Then run:

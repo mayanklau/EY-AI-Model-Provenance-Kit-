@@ -26,7 +26,7 @@ def test_defaults():
     assert s.huge_model_params == 10e9
     assert isinstance(s.cache_dir, Path)
     assert s.hf_dataset_repo
-    assert s.hf_dataset_repo in s.hf_deep_signals_url
+    assert "EY-AI-Model-Governace-Toolkit-Dataset-" in s.hf_deep_signals_url
     assert "deep-signals.zip" in s.hf_deep_signals_url
     assert len(s.hf_deep_signals_sha256) == 64
 
@@ -45,6 +45,7 @@ def test_env_override_cache_dir(monkeypatch):
 
 def test_hf_url_derived_from_repo(monkeypatch):
     monkeypatch.setenv("PROVENANCEKIT_HF_DATASET_REPO", "my-org/my-repo")
+    monkeypatch.setenv("PROVENANCEKIT_HF_DEEP_SIGNALS_URL", "")
     s = Settings()
     assert s.hf_dataset_repo == "my-org/my-repo"
     assert "my-org/my-repo" in s.hf_deep_signals_url

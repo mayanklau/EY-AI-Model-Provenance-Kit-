@@ -41,7 +41,10 @@ class Settings(BaseSettings):
     dev_mode: bool = False
 
     hf_dataset_repo: str = "ey-ai/model-provenance-kit"
-    hf_deep_signals_url: str = ""
+    hf_deep_signals_url: str = (
+        "https://github.com/mayanklau/EY-AI-Model-Governace-Toolkit-Dataset-"
+        "/releases/download/deep-signals-v1/deep-signals.zip"
+    )
     hf_deep_signals_sha256: str = (
         "b94040b668bea03e44b95a69c8554046d68fe0325b54ce64141bbf40765e48e9"
     )

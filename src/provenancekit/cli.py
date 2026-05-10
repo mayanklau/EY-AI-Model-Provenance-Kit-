@@ -80,7 +80,7 @@ def _build_parser() -> argparse.ArgumentParser:
     """Construct the top-level argument parser."""
     parser = argparse.ArgumentParser(
         prog="provenancekit",
-        description="Model provenance detection toolkit",
+        description="EY AI Model Provenance Kit",
     )
     parser.add_argument(
         "-v",
@@ -93,7 +93,7 @@ def _build_parser() -> argparse.ArgumentParser:
     cmp = sub.add_parser("compare", help="Compare two models for provenance")
     cmp.add_argument(
         "model_a",
-        help="First model: HF repo id (e.g. gpt2) or local path",
+        help="First model: Hugging Face repo id (e.g. gpt2) or local path",
     )
     cmp.add_argument(
         "model_b",
@@ -202,7 +202,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     dl = sub.add_parser(
         "download-deepsignals-fingerprint",
-        help="Download deep-signal weight fingerprints from Hugging Face",
+        help="Download deep-signal weight fingerprints",
     )
     dl.add_argument(
         "--db-root",
@@ -345,7 +345,8 @@ def _run_scan(args: argparse.Namespace) -> int:
         print(
             "\nHint: Deep-signal fingerprints not installed. "
             "Run `provenancekit download-deepsignals-fingerprint` "
-            "for weight-level matching.",
+            "for weight-level matching, or set PROVENANCEKIT_HF_DATASET_REPO "
+            "to your approved fingerprint dataset.",
             file=sys.stderr,
         )
 

@@ -42,6 +42,7 @@ keywords = [
 ]
 dependencies = [
     "accelerate",
+    "certifi",
     "numpy",
     "pandas",
     "protobuf",

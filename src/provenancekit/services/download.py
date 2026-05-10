@@ -35,6 +35,7 @@ from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request
 
+import certifi
 import structlog
 
 from provenancekit.config.settings import Settings
@@ -49,7 +50,7 @@ def _get_settings() -> Settings:
 
 def _ssl_context() -> ssl.SSLContext:
     """Create an SSL context that verifies certificates."""
-    ctx = ssl.create_default_context()
+    ctx = ssl.create_default_context(cafile=certifi.where())
     ctx.minimum_version = ssl.TLSVersion.TLSv1_2
     return ctx
 
@@ -194,7 +195,7 @@ def _download_and_install(
         return 1
 
     # ── Download ──────────────────────────────────────────────
-    print("Downloading deep-signal fingerprints from Hugging Face ...")
+    print("Downloading deep-signal fingerprints ...")
     print(f"  URL: {hf_url}")
     log.info("download_start", url=hf_url)
 
@@ -231,6 +232,12 @@ def _download_and_install(
             log.error("download_failed", error=str(exc), attempts=_MAX_RETRIES)
             print(
                 f"  Download failed after {_MAX_RETRIES} attempts: {exc}",
+                file=sys.stderr,
+            )
+            print(
+                "  Check PROVENANCEKIT_HF_DATASET_REPO or "
+                "PROVENANCEKIT_HF_DEEP_SIGNALS_URL and make sure the "
+                "fingerprint archive is available to this environment.",
                 file=sys.stderr,
             )
             return 1
@@ -472,6 +479,11 @@ def show_deep_signals_status(db_root: Path) -> int:
         print(f"Deep-signal fingerprints NOT installed at: {deep_signals_dir}")
         print(
             "Run: provenancekit download-deepsignals-fingerprint",
+        )
+        print(
+            "Configure PROVENANCEKIT_HF_DATASET_REPO or "
+            "PROVENANCEKIT_HF_DEEP_SIGNALS_URL if your organization hosts "
+            "fingerprints in a private dataset."
         )
         return 0
 

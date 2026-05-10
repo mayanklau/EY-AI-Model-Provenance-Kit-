@@ -74,7 +74,7 @@ Deep-signal fingerprints are pre-computed weight-level features stored as parque
 The default deep-signal archive is hosted as a GitHub release asset:
 
 ```bash
-https://github.com/mayanklau/EY-AI-Model-Governace-Toolkit-Dataset-/releases/download/deep-signals-v1/deep-signals.zip
+https://github.com/mayanklau/EY-AI-Model-Governance-Toolkit-Dataset/releases/download/deep-signals-v1/deep-signals.zip
 ```
 
 Then run:
